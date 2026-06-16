@@ -1,0 +1,117 @@
+{
+  "id": "eva__lvbench__P.1__task_2393__20260423",
+  "framework": "eva",
+  "benchmark": "lvbench",
+  "modality": "video",
+  "task": {
+    "query": "What is the first animal to appear on the stage?",
+    "options": {
+      "A": "Horse",
+      "B": "Camel",
+      "C": "Sheep",
+      "D": "Dog"
+    },
+    "answer": "B"
+  },
+  "trajectory": [
+    {
+      "kind": "system",
+      "content": "Use Frame Select Tool to Analysis the video and generate an answer to the question.\n\nYou solve video QA by iteratively inspecting frames and then answering.\nThe frame_select tool returns image frames sampled uniformly between\n``start_time`` and ``end_time`` (integer seconds); ``nframes`` is how many\nto sample (typically 4-16); ``resize`` is an optional float in (0,1]\n(default 1.0; lower it for high-resolution video).\n\nTOOL-CALL FORMAT (native function calling). Invoke the provided\n``frame_select`` function via the model's built-in function-calling API —\ndo NOT emit ``<tool_call>`` text tags. You may call it multiple times in\nsequence; the frame payload arrives as a function response on the next\nturn.\n\nREASONING NUDGE (mandatory). Every turn that issues a ``frame_select``\ncall MUST begin with 1-2 sentences of plain text explaining:\n  (a) what you are looking for in those frames, and\n  (b) why the ``start_time`` / ``end_time`` window you picked is the\n      right place to search given what you have seen so far.\nEmit this text FIRST, in the same turn, then make the function call.\nKeep it short (under 40 words). If the previous frames did not resolve\nthe question, say briefly what you ruled out before calling again.\n\nANSWER FORMAT. When you are ready to answer, emit EXACTLY:\n    <answer>X</answer>\nwhere X is a single option letter (A, B, C, or D) for multiple-choice\nquestions, or the short free-form answer otherwise. Do NOT add any\nexplanation after the closing tag.\n\nHARD RULES:\n- Always inspect at least one frame_select result before answering. Do\n  NOT answer blind from the question alone — you cannot see the video\n  until the frame tool returns frames.\n- NEVER emit a tool call and <answer> in the same response. Choose one:\n  either call the tool (and wait for the next turn to see frames), OR\n  emit <answer> when you already have enough evidence from earlier tool\n  responses. If you emit both, the tool call wins and <answer> is\n  ignored, wasting a round.\n- Only emit <answer> after you have received at least one set of frames\n  and are confident in your answer.\n"
+    },
+    {
+      "kind": "user",
+      "content": "Video Length: 2735 seconds. Original video resolution: 360p. What is the first animal to appear on the stage?\\n(A) Horse\\n(B) Camel\\n(C) Sheep\\n(D) Dog"
+    },
+    {
+      "kind": "assistant",
+      "content": "",
+      "tool_calls": [
+        {
+          "id": "call_4ffef387d6ff",
+          "name": "frame_select",
+          "arguments": "{\"end_time\": 100, \"nframes\": 10, \"start_time\": 0}"
+        }
+      ]
+    },
+    {
+      "kind": "tool",
+      "content": "Returned 10 frames at timestamps (seconds): [0, 11, 22, 33, 44, 55, 66, 77, 88, 100]. Images follow in the next user turn.\nFrame 0 at [00:00]: \n<image>\n\nFrame 1 at [00:11]: \n<image>\n\nFrame 2 at [00:22]: \n<image>\n\nFrame 3 at [00:33]: \n<image>\n\nFrame 4 at [00:44]: \n<image>\n\nFrame 5 at [00:55]: \n<image>\n\nFrame 6 at [01:06]: \n<image>\n\nFrame 7 at [01:17]: \n<image>\n\nFrame 8 at [01:28]: \n<image>\n\nFrame 9 at [01:40]: \n<image>\n\nIf more information is needed, call the frame selection tool again.\n\nQuestion: What is the first animal to appear on the stage?\\n(A) Horse\\n(B) Camel\\n(C) Sheep\\n(D) Dog",
+      "tool_call_id": "call_4ffef387d6ff",
+      "tool_name": "frame_select",
+      "frames": [
+        {
+          "index": 0,
+          "time_s": 0,
+          "path": "assets/examples/lvbench_camel/frame_0000.jpg"
+        },
+        {
+          "index": 1,
+          "time_s": 11,
+          "path": "assets/examples/lvbench_camel/frame_0001.jpg"
+        },
+        {
+          "index": 2,
+          "time_s": 22,
+          "path": "assets/examples/lvbench_camel/frame_0002.jpg"
+        },
+        {
+          "index": 3,
+          "time_s": 33,
+          "path": "assets/examples/lvbench_camel/frame_0003.jpg"
+        },
+        {
+          "index": 4,
+          "time_s": 44,
+          "path": "assets/examples/lvbench_camel/frame_0004.jpg"
+        },
+        {
+          "index": 5,
+          "time_s": 55,
+          "path": "assets/examples/lvbench_camel/frame_0005.jpg"
+        },
+        {
+          "index": 6,
+          "time_s": 66,
+          "path": "assets/examples/lvbench_camel/frame_0006.jpg"
+        },
+        {
+          "index": 7,
+          "time_s": 77,
+          "path": "assets/examples/lvbench_camel/frame_0007.jpg"
+        },
+        {
+          "index": 8,
+          "time_s": 88,
+          "path": "assets/examples/lvbench_camel/frame_0008.jpg"
+        },
+        {
+          "index": 9,
+          "time_s": 100,
+          "path": "assets/examples/lvbench_camel/frame_0009.jpg"
+        }
+      ]
+    },
+    {
+      "kind": "assistant",
+      "content": "The first animal to appear on stage is a dog puppet, which is being walked by a performer in a red vest starting around the 44-second mark. Its physical characteristics, including its snout and tail, distinguish it from the other animals listed.\n\n<answer>D</answer>",
+      "injected": true
+    }
+  ],
+  "ground_truth": {
+    "agent": null,
+    "step": 4,
+    "mode": "P.1"
+  },
+  "video_context": {
+    "video_id": "o-gLbgpzCc8",
+    "videos": [
+      "o-gLbgpzCc8.mp4"
+    ],
+    "video_duration_seconds": 2735,
+    "time_reference": "00:40-01:00",
+    "question_type": [
+      "entity recognition"
+    ],
+    "video_type": "live"
+  }
+}
