@@ -1,0 +1,8 @@
+# macOS
+.DS_Store
+# editor cruft
+*.swp
+*~
+.vscode/
+# scratch
+*.local-backup-keep
