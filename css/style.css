@@ -131,7 +131,7 @@ a:hover { text-decoration: underline; }
 .authors {
   color: var(--ink-soft);
   font-size: 15px;
-  margin: 20px 0 26px;
+  margin: 46px 0 26px;
 }
 .author-list {
   margin: 0 0 8px;
@@ -148,6 +148,55 @@ a:hover { text-decoration: underline; }
   font-weight: 600;
   font-size: 0.7em;
   padding-left: 1px;
+}
+/* first-author "open to work" bubble above the name */
+.author-list .otw { position: relative; }
+.otw-tag {
+  position: absolute;
+  bottom: calc(100% - 4px);
+  left: -2px;
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.otw-tag:hover { text-decoration: none; }
+.otw-bubble {
+  position: relative;
+  margin-bottom: 6px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: #e6f4ea;
+  border: 1.5px solid #057642;
+  color: #057642;
+  font-size: 11.5px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: .01em;
+  transform: rotate(-4deg);
+  transform-origin: 0 100%;
+  animation: otw-pop .5s cubic-bezier(.3, 1.6, .5, 1) .6s both;
+}
+.otw-bubble::before {
+  content: "";
+  position: absolute;
+  left: 14px;
+  bottom: -5px;
+  width: 7px;
+  height: 7px;
+  background: #e6f4ea;
+  border-right: 1.5px solid #057642;
+  border-bottom: 1.5px solid #057642;
+  transform: rotate(45deg);
+}
+.otw-tag:hover .otw-bubble { background: #d3ecda; }
+@keyframes otw-pop {
+  from { opacity: 0; transform: rotate(-4deg) scale(.4); }
+  to   { opacity: 1; transform: rotate(-4deg) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .otw-bubble { animation: none; }
 }
 .affils {
   margin: 0;
@@ -275,46 +324,6 @@ a:hover { text-decoration: underline; }
 }
 .section p { color: var(--ink-soft); }
 .lede { font-size: 17px; line-height: 1.7; }
-
-/* ── epigraph: famous quote framing the whole page ─────────────── */
-.epigraph {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 8px 24px 48px;
-  text-align: center;
-}
-.epigraph::before {
-  content: "";
-  display: block;
-  width: 40px;
-  height: 3px;
-  margin: 0 auto 28px;
-  background: var(--accent);
-  border-radius: 999px;
-  opacity: .55;
-}
-.epigraph blockquote { margin: 0; }
-.epigraph p {
-  margin: 0;
-  font-family: 'Space Grotesk', 'Inter', sans-serif;
-  font-style: italic;
-  font-weight: 500;
-  font-size: clamp(1.2rem, 2.6vw, 1.7rem);
-  line-height: 1.4;
-  letter-spacing: -.015em;
-  color: var(--ink);
-}
-.epigraph p::before { content: "\201C"; }
-.epigraph p::after  { content: "\201D"; }
-.epigraph cite {
-  display: block;
-  margin-top: 16px;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 14.5px;
-  letter-spacing: .02em;
-  color: var(--accent);
-}
 
 /* ── centered section heads (h2 + sub, no eyebrow) ─────────────── */
 .section-head {
